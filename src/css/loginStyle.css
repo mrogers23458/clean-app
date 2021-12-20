@@ -1,0 +1,64 @@
+/* Login & Register Form realted CSS */
+.loginFormHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    margin-top: 30vh;
+}
+
+/* email related CSS */
+.email-label {
+    padding: 5px;
+    text-align: left;
+}
+
+.emailInput {
+    margin: 5px;
+    padding: 10px;
+    width: 70vw;
+}
+
+/* password related CSS */
+.password-label {
+    padding: 5px;
+    text-align: left;
+}
+
+.passwordInput {
+    margin: 5px;
+    padding: 10px;
+    width: 70vw;
+}
+
+/*Login Form Buttons realted CSS */
+.loginButtons {
+    display: flex;
+}
+
+.regButton {
+    height: 5vh;
+    width: 50%;
+    margin: 5px;
+}
+
+.logButton {
+    width: 50%;
+    height: 5vh;
+    margin: 5px;
+}
+
+/* link related CSS*/
+
+.extraLinks {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+}
