@@ -24,6 +24,7 @@ header {
     margin: 5px;
     padding: 10px;
     width: 70vw;
+    border-radius: 5px;
 }
 
 /* password related CSS */
@@ -36,6 +37,7 @@ header {
     margin: 5px;
     padding: 10px;
     width: 70vw;
+    border-radius: 5px;
 }
 
 /*Login Form Buttons realted CSS */
@@ -47,12 +49,14 @@ header {
     height: 5vh;
     width: 50%;
     margin: 5px;
+    border-radius: 5px;
 }
 
 .logButton {
     width: 50%;
     height: 5vh;
     margin: 5px;
+    border-radius: 5px;
 }
 
 /* link related CSS*/
