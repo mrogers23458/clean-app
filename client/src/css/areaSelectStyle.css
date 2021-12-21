@@ -1,0 +1,18 @@
+.tile-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 7vw;
+}
+
+.tile {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 15vh;
+    width: 40vw;
+    border: 2px solid black;
+    margin-top: 1vh;
+    
+}

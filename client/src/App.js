@@ -10,7 +10,8 @@ import {
 import { setContext } from '@apollo/client/link/context'
 import { 
   LoginPage,
-  RegisterPage } from './pages';
+  RegisterPage,
+  AreaSelectPage } from './pages';
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -38,6 +39,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/areaselect" element={<AreaSelectPage />} />
         </Routes>
     </div>
     </ApolloProvider>

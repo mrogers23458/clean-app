@@ -11,38 +11,27 @@
 }
 
 header {
-    margin-top: 30vh;
+    margin-top: 20vh;
 }
 
-/* email related CSS */
-.email-label {
-    padding: 5px;
-    text-align: left;
+.loginContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: green;
 }
 
-.emailInput {
-    margin: 5px;
-    padding: 10px;
-    width: 70vw;
-    border-radius: 5px;
-}
-
-/* password related CSS */
-.password-label {
-    padding: 5px;
-    text-align: left;
-}
-
-.passwordInput {
-    margin: 5px;
-    padding: 10px;
-    width: 70vw;
-    border-radius: 5px;
+h1 {
+    color: white;
 }
 
 /*Login Form Buttons realted CSS */
 .loginButtons {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .regButton {
@@ -65,4 +54,18 @@ header {
     margin-top: 10vh;
     display: flex;
     flex-direction: column;
+}
+
+.entry {
+    margin: 5px;
+    padding: 10px;
+    width: 70vw;
+    border-radius: 5px;
+}
+
+.form-label {
+    padding: 5px;
+    text-align: left;
+    font-weight: bold;
+    color: white;
 }

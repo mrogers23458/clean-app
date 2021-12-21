@@ -66,10 +66,10 @@ export default function LoginPage(){
             </header>
             <div className="loginFormHolder">
                 <form className="loginForm">
-                    <label className="email-label" htmlFor="email">E-mail</label> 
-                    <input className="emailInput" type="email" placeholder="youremail@provider.com" value={email} name="email" onChange={handleInputChange}></input>
-                    <label className="password-label" htmlFor="password">Password</label>
-                    <input className="passwordInput" type="password" placeholder="password" value={password} name="password" onChange={handleInputChange}></input>
+                    <label className="form-label" htmlFor="email">E-mail</label> 
+                    <input className="emailInput entry" type="email" placeholder="youremail@provider.com" value={email} name="email" onChange={handleInputChange}></input>
+                    <label className="form-label" htmlFor="password">Password</label>
+                    <input className="passwordInput entry" type="password" placeholder="password" value={password} name="password" onChange={handleInputChange}></input>
                     <div className="loginButtons">
                         <button className="regButton" type="submit" onSubmit={handleFormSubmit}>Register</button>
                         <button className="logButton" type="submit" onSubmit={handleFormSubmit}>Login</button>
