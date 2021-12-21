@@ -1,6 +1,4 @@
 {
-  "short_name": "new app",
-  "name": "Create React App Development",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,7 +16,11 @@
       "sizes": "512x512"
     }
   ],
+  "name": "Clean App React App Development",
+  "short_name": "Clean App",
+  "orientation": "portrain",
   "start_url": "/",
+  "description": "a basic cleaning app",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
