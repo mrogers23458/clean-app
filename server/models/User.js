@@ -11,13 +11,11 @@ const userSchema = new Schema(
         },
         email: {
             type: String,
-            required: true,
             unique: true,
-            match: [/.+@.+\..+/, 'Must use a valid email address'],
+            allowNull: true
         },
         password: {
             type: String,
-            required: true
         }
     },
     //use virtual

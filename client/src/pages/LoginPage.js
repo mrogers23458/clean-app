@@ -71,12 +71,12 @@ export default function LoginPage(){
                     <label className="form-label" htmlFor="password">Password</label>
                     <input className="passwordInput entry" type="password" placeholder="password" value={password} name="password" onChange={handleInputChange}></input>
                     <div className="loginButtons">
-                        <button className="regButton" type="submit" onSubmit={handleFormSubmit}>Register</button>
                         <button className="logButton" type="submit" onSubmit={handleFormSubmit}>Login</button>
                     </div>
                 </form>
             </div>
             <div className="extraLinks">
+                <p>Dont have an account? <a href="/register">Register</a> for one now!</p>
                 <a href="/forgotpassword">Forgot Password?</a>
                 <a href="/privacy">Privacy</a>
             </div>

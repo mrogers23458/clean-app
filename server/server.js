@@ -6,7 +6,14 @@ const { typeDefs, resolvers } = require('./schemas')
 
 const db = require('./config/connection')
 
-const PORT = process.env.PORT || 3001;
+//function to drop the DB for testing - remove prior to deployment
+/* async function dropDb() {
+  await db.dropDatabase()
+}
+
+dropDb() */
+
+const PORT = process.env.PORT || 3003;
 const app = express()
 
 const server = new ApolloServer({

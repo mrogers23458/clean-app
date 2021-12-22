@@ -7,12 +7,22 @@ type User {
     lastName: String
     email: String!
     password: String!
-
 }
 
 type Query {
     users: [User]
+    user(email: String!): User
 }
+
+type Mutation {
+    addNewUser(
+        firstName: String
+        lastName: String
+        email: String
+        password: String
+    ): User
+}
+
 `;
 
 module.exports = typeDefs
