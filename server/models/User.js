@@ -3,20 +3,16 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
-        firstName: {
-            type: String,
-        },
-        lastName: {
-            type: String,
-        },
-        email: {
-            type: String,
-            unique: true,
-            allowNull: true
-        },
-        password: {
-            type: String,
-        }
+        firstName: String,
+        lastName: String,
+        email: String,
+        password: String,
+        areas:[ 
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Area'
+            }
+        ]
     },
     //use virtual
     {

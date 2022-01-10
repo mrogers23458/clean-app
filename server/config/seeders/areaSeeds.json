@@ -1,0 +1,32 @@
+[
+    {
+        "areaName": "Bathroom",
+        "areaDescription": "Bathroom 1",
+        "areaOwner": "testuser1@email.com"
+    },
+    {
+        "areaName": "Bedroom",
+        "areaDescription": "Bedroom1",
+        "areaOwner": "testuser1@email.com"
+    },
+    {
+        "areaName": "Kitchen",
+        "areaDescription": "Main Kitchen",
+        "areaOwner": "testuser1@email.com"
+    },
+    {
+        "areaName": "Living Room",
+        "areaDescription": "Living Room main areas",
+        "areaOwner": "testuser1@email.com"
+    },
+    {
+        "areaName": "Bathroom",
+        "areaDescription": "Bathroom 2",
+        "areaOwner": "testuser2@email.com"
+    },
+    {
+        "areaName": "Bedroom",
+        "areaDescription": "Bedroom 2",
+        "areaOwner": "testuser2@email.com"
+    }
+]

@@ -4,70 +4,59 @@ import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom'
 //helper import
 import { validateEmail } from '../utils/helper'
+//Use mutation import from apollo
+import { useMutation } from "@apollo/client";
+//mutations import from mutationjs
+import { REGISTER } from '../utils/mutation'
+
 
 //styling import
 import '../css/loginStyle.css';
 
 export default function LoginPage(){
-
+    
     let navigate = useNavigate();
 
-    //creating variables for state and setting their value to an empty string
-    //first name and set first state
-    const [firstName, setFirstName] = useState('')
-    //last name and set last state
-    const [lastName, setLastName] = useState('')
-    //email and setEmail state
-    const [email, setEmail] = useState('')
-    //password and setPassword state
-    const [password, setPassword] = useState('')
-    //error message if form errors
-    const [errorMessage, setErrorMessage] = useState('')
-    //success message if form is properly submitted
-    const [successMessage, setSuccessMessage] = useState('')
+    const [newUserCredentials, setUserCredentials] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+    });
 
-    //function for changing state to update with user input
-    const handleInputChange = (e) => {
+    const [register, { error, data, loading }] = useMutation(REGISTER);
 
-        const { target } = e;
-        const inputType = target.name
-        const inputValue = target.inputValue
-
-        //update and set state based on user input in a field
-        if (inputType ==='firstName') {
-            setFirstName(inputValue)
-        }
-
-        if (inputType ==='lastName') {
-            setLastName(inputValue)
-        }
-
-        if (inputType === 'email') {
-            setEmail(inputValue)
-        }
-
-        if (inputType ==='password') {
-            setPassword(inputValue)
-        }
-
-
+    if (error) {
+        console.log(error)
+        return
     }
 
+    const handleInputChange = (e) => 
+        setUserCredentials({...newUserCredentials, [e.target.name]: e.target.value }, console.log('input test'), console.log(e.target));
 
-    const handleFormSubmit = (e) => {
-        //prevent page from refreshing
-        e.preventDefault();
+    const handleFormSubmit = async (e) => {
+        e.preventDefault()
+        console.log('used handleformsubmit')
+        if (
+            newUserCredentials.firstName  &&
+            newUserCredentials.lastName &&
+            newUserCredentials.email &&
+            newUserCredentials.password 
+            ) {
+                
+                const { firstName, lastName, email, password } = newUserCredentials
+                console.log(newUserCredentials)
+                const { userData } =await register({
+                    variables: {
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                    },
+                });
 
-        // check to make sure the user has entered a valid email structure with the helper of ValidEmail Function in helper.js
-        if (!validateEmail(email)) {
-            setErrorMessage('Email is required');
-            
-            //database logic maybe?
-            return;
-        }
-
-        //if user successfully registers or logs in re-direct logic goes here
-        navigate('/area')
+                navigate('/areaselect')
+            }
     }
 
 
@@ -80,23 +69,23 @@ export default function LoginPage(){
                 <form className="loginForm">
                     {/* First Name */}
                     <label className="form-label" htmlFor="firstName">First Name</label>
-                    <input className="firstInput entry" type="text" placeholder="First Name" value={firstName} name="firstName" onChange={handleInputChange}></input>
+                    <input className="firstInput entry" type="text" placeholder="First Name" value={newUserCredentials.firstName} name="firstName" onChange={handleInputChange}></input>
 
                     {/* Last Name */}
                     <label className="form-label" htmlFor="lastName">Last Name</label>
-                    <input className="lastInput entry" type="text" placeholder="Last Name" value={lastName} name="lastName" onChange={handleInputChange}></input>
+                    <input className="lastInput entry" type="text" placeholder="Last Name" value={newUserCredentials.lastName} name="lastName" onChange={handleInputChange}></input>
 
                     {/* email */}
                     <label className="form-label" htmlFor="email">E-mail</label> 
-                    <input className="emailInput entry" type="email" placeholder="youremail@provider.com" value={email} name="email" onChange={handleInputChange}></input>
+                    <input className="emailInput entry" type="email" placeholder="youremail@provider.com" value={newUserCredentials.email} name="email" onChange={handleInputChange}></input>
 
                     {/* password */}
                     <label className="form-label" htmlFor="password">Password</label>
-                    <input className="passwordInput entry" type="password" placeholder="password" value={password} name="password" onChange={handleInputChange}></input>
+                    <input className="passwordInput entry" type="password" placeholder="password" value={newUserCredentials.password} name="password" onChange={handleInputChange}></input>
 
                     {/* buttons */}
                     <div className="loginButtons">
-                        <button className="regButton" type="submit" onSubmit={handleFormSubmit}>Register</button>
+                        <button className="regButton" type="submit" onClick={handleFormSubmit}>Register</button>
                     </div>
                 </form>
             </div>

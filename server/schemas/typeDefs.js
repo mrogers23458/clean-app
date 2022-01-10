@@ -5,14 +5,39 @@ type User {
     _id: ID
     firstName: String
     lastName: String
-    email: String!
-    password: String!
+    email: String
+    password: String
+    areas: [Area]
+}
+
+type Area {
+    _id: ID
+    areaName: String
+    areaDescription: String
+    areaOwner: String
+    tasks: [Task]
+}
+
+type Task {
+    _id: ID
+    taskTitle: String
+    taskDescription: String
+    taskComplete: Boolean
+    taskOwner: String
+}
+
+type Auth {
+    token: ID!
+    user: User
 }
 
 type Query {
     users: [User]
     user(email: String!): User
+    areas(email: String): [Area]
+    area(areaId: ID!): Area
 }
+
 
 type Mutation {
     addNewUser(
@@ -20,7 +45,18 @@ type Mutation {
         lastName: String
         email: String
         password: String
-    ): User
+    ): Auth
+    addArea(
+        areaName: String
+        areaDescription: String,
+        areaOwner: String
+    ) : Area
+    addTask(
+        areaId: ID
+        taskTitle: String
+        taskDescription: String
+        taskOwner: String
+    ): Area
 }
 
 `;
