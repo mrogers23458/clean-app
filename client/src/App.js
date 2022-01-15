@@ -13,7 +13,10 @@ import {
   RegisterPage,
   AreaSelectPage, 
   AreaTaskPage,
-  CreateArea} from './pages';
+  CreateArea,} from './pages';
+import  Area  from './components';
+
+
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -38,11 +41,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
+        <Routes >
+          <Route path="/" element={<LoginPage client={client} />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/createarea" element={<CreateArea />} />
-          <Route path="/areaselect" element={<AreaSelectPage />} />
+          <Route path="/areaselect" element={<AreaSelectPage client={client} />} />
           <Route path="/areatasks/:name" element={<AreaTaskPage />} />
         </Routes>
     </div>

@@ -1,31 +1,58 @@
 import { useQuery, useMutation } from "@apollo/client";
-import React from "react";
-import  Area from "../components/Area"
-import  NewAreaForm  from "../components/NewAreaForm"
-import { GET_ALL_AREAS, GET_USER } from "../utils/query";
-import { GETAREA } from "../utils/mutation"
-import '../css/areaSelectStyle.css'
+import react from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import  Area from "../components/Area"
+import '../css/areaSelectStyle.css'
+import auth from "../utils/auth";
+import { ADDAREA, REMOVEAREA } from "../utils/mutation";
+import { GET_USER } from "../utils/query";
 
 
-export default function AreaSelectPage() {
 
-    const { loading, data} = useQuery(GET_USER, {
-        variables: {email: "testuser1@email.com"}
+export default function AreaSelectPage(props) {
+    
+    
+    const userInfo = auth.getUser().data;
+    const userEmail = userInfo.email
+    let navigate = useNavigate();
+    console.log(props)
+    const client = props.client
+    
+    const {loading, data} = useQuery(GET_USER, {
+        variables: {
+            email: userEmail
+        }
     })
+    
+    if (!data) {
+        return (
+            <div>
+                loading...
+            </div>
+        )
+    }
 
-    const user = data
+    client.reFetchObservableQueries(GET_USER)
 
-    console.log(user)
-    console.log(data)
+    const handleNav = function () {
+        navigate('/createarea')
+    }
+
+    if (data.user) {
+        const { user } = data
+        console.log(user)
+
+        return (
+            <div>
+                <Area data={user} client={client}/>
+                <button onClick={handleNav}> Add New  <span className="addSymbol"> + </span> </button>
+            </div>
+        )
+    }
 
 
-    return (
-       <div>
-           <h2>TEST</h2>
-           <Area name={'testName'} />
-       </div> 
-    )
+
 
 }
 

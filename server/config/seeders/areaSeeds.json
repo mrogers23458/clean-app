@@ -2,7 +2,13 @@
     {
         "areaName": "Bathroom",
         "areaDescription": "Bathroom 1",
-        "areaOwner": "testuser1@email.com"
+        "areaOwner": "testuser1@email.com",
+        "tasks": [
+            {
+                "taskTitle": "Clean Sink",
+                "taskDescription": "Use Cleaner on sink"
+            }
+        ]
     },
     {
         "areaName": "Bedroom",

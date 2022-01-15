@@ -1,63 +1,58 @@
-//allowing react to use state while updating email and password
-import React, {useState} from "react";
-//React Router Navigation import
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-//helper import
-import { validateEmail } from '../utils/helper'
-
-//styling import
 import '../css/loginStyle.css';
+import { useMutation } from "@apollo/client";
+import { LOGIN } from '../utils/mutation'
+import Auth from '../utils/auth'
 
 export default function LoginPage(){
-
+    console.log(Auth.getUser())
     let navigate = useNavigate();
 
-    //creating variables for state and setting their value to an empty string
-    //email and setEmail state
-    const [email, setEmail] = useState('')
-    //password and setPassword state
-    const [password, setPassword] = useState('')
-    //error message if form errors
-    const [errorMessage, setErrorMessage] = useState('')
-    //success message if form is properly submitted
-    const [successMessage, setSuccessMessage] = useState('')
-
-    //function for changing state to update with user input
-    const handleInputChange = (e) => {
-
-        const { target } = e;
-        const inputType = target.name
-        const inputValue = target.inputValue
-
-        //update and set state based on user input in a field
-        if (inputType === 'email') {
-            setEmail(inputValue)
+    //set sate for login credentials
+    const [loginInfo, setLoginInfo] = useState(
+        {
+            email: '',
+            password: '',
         }
+    );
 
-        if (inputType ==='password') {
-            setPassword(inputValue)
-        }
-
-
+    //login mutation
+    const [login, {error, data, loading}] = useMutation(LOGIN);
+    
+    // function to set login state to the value of the targeted field as user inputs
+    const handleInputChange = function(e) {
+        return setLoginInfo({...loginInfo, [e.target.name]: e.target.value})
     }
 
-
-    const handleFormSubmit = (e) => {
-        //prevent page from refreshing
+    //on form submit, check login info
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
+        console.log('handle form submit used')
+        console.log(loginInfo)
+        
+        if (loginInfo.email && loginInfo.password) {
+            const { email, password } = loginInfo
+            const { data } = await login(
+                {
+                    variables: {
+                        email,
+                        password
+                    },
+                }
+            );
 
-        // check to make sure the user has entered a valid email structure with the helper of ValidEmail Function in helper.js
-        if (!validateEmail(email)) {
-            setErrorMessage('Email is required');
-            
-            //database logic maybe?
-            return;
+            if(!data?.email) {
+                console.log('loading')
+            }
+
+            if (data) {
+                console.log('data check hit')
+                await Auth.login(data.login.token)
+                return navigate('/areaselect')
+            }
         }
-
-        //if user successfully registers or logs in re-direct logic goes here
-        navigate('/area')
     }
-
 
     return (
         <div className="loginContainer">
@@ -67,11 +62,11 @@ export default function LoginPage(){
             <div className="loginFormHolder">
                 <form className="loginForm">
                     <label className="form-label" htmlFor="email">E-mail</label> 
-                    <input className="emailInput entry" type="email" placeholder="youremail@provider.com" value={email} name="email" onChange={handleInputChange}></input>
+                    <input className="emailInput entry" type="email" placeholder="youremail@provider.com" value={loginInfo.email} name="email" onChange={handleInputChange}></input>
                     <label className="form-label" htmlFor="password">Password</label>
-                    <input className="passwordInput entry" type="password" placeholder="password" value={password} name="password" onChange={handleInputChange}></input>
+                    <input className="passwordInput entry" type="password" placeholder="password" value={loginInfo.password} name="password" onChange={handleInputChange}></input>
                     <div className="loginButtons">
-                        <button className="logButton" type="submit" onSubmit={handleFormSubmit}>Login</button>
+                        <button className="logButton" type="submit" onClick={handleFormSubmit}>Login</button>
                     </div>
                 </form>
             </div>

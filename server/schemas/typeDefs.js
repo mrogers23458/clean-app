@@ -33,9 +33,10 @@ type Auth {
 
 type Query {
     users: [User]
-    user(email: String!): User
+    user(email: String): User
+    me: User
     areas(email: String): [Area]
-    area(areaId: ID!): Area
+    area(areaName: String): Area
 }
 
 
@@ -52,11 +53,18 @@ type Mutation {
         areaOwner: String
     ) : Area
     addTask(
-        areaId: ID
+        areaName: String
         taskTitle: String
         taskDescription: String
         taskOwner: String
     ): Area
+
+    removeArea(
+        _id: ID
+        areaOwner: String
+    ): Area
+
+    login(email: String!, password: String!): Auth
 }
 
 `;

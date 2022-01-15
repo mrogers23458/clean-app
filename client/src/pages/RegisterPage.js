@@ -8,12 +8,14 @@ import { validateEmail } from '../utils/helper'
 import { useMutation } from "@apollo/client";
 //mutations import from mutationjs
 import { REGISTER } from '../utils/mutation'
+//Authentication Import
+import Auth from '../utils/auth'
 
 
 //styling import
 import '../css/loginStyle.css';
 
-export default function LoginPage(){
+export default function RegisterPage(){
     
     let navigate = useNavigate();
 
@@ -46,7 +48,7 @@ export default function LoginPage(){
                 
                 const { firstName, lastName, email, password } = newUserCredentials
                 console.log(newUserCredentials)
-                const { userData } =await register({
+                const { data } =await register({
                     variables: {
                         firstName,
                         lastName,
@@ -55,7 +57,15 @@ export default function LoginPage(){
                     },
                 });
 
-                navigate('/areaselect')
+                console.log( data )
+                if ( data ) {
+                    console.log('user data check hit')
+                    console.log(data)
+                    Auth.login(data.addNewUser.token)
+
+                    navigate('/areaselect')
+                }
+
             }
     }
 
