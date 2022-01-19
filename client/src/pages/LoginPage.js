@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import '../css/loginStyle.css';
 import { useMutation } from "@apollo/client";
 import { LOGIN } from '../utils/mutation'
 import Auth from '../utils/auth'
+import '../css/loginStyle.css';
+import { RegisterPage } from '.';
 
 export default function LoginPage(){
     let navigate = useNavigate();
@@ -18,7 +19,12 @@ export default function LoginPage(){
 
     //login mutation
     const [login, {error, data, loading}] = useMutation(LOGIN);
-    
+
+    //error handling
+    const [errMessage, setErrMessage] = useState({
+        message: ''
+    })
+
     // function to set login state to the value of the targeted field as user inputs
     const handleInputChange = function(e) {
         return setLoginInfo({...loginInfo, [e.target.name]: e.target.value})
@@ -32,25 +38,27 @@ export default function LoginPage(){
         
         if (loginInfo.email && loginInfo.password) {
             const { email, password } = loginInfo
-            const { data } = await login(
+            const  { data, error, loading } = await login(
                 {
                     variables: {
                         email,
                         password
                     },
                 }
-            );
 
-            if(!data?.email) {
-                console.log('loading')
-            }
-
+            ).catch((err) => {
+                window.alert(err)
+            })
+            
             if (data) {
                 console.log('data check hit')
                 await Auth.login(data.login.token)
                 return navigate('/areaselect')
             }
+        
         }
+
+        
     }
 
     return (

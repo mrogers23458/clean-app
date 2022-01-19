@@ -76,15 +76,17 @@ const resolvers = {
 
             if (!loggedIn) {
                 throw new AuthenticationError('No account with this e-mail found')
+                
             }
 
             const checkPass = await loggedIn.isCorrectPassword(password)
 
             if (!checkPass) {
-                throw new AuthenticationError('Incorrect Password')
+                throw new AuthenticationError('Incorrect Password test test test')
             }
 
             const token = signToken(loggedIn)
+
             return { token, loggedIn}
         },
 
