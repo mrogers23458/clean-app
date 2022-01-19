@@ -13,8 +13,10 @@ import {
   RegisterPage,
   AreaSelectPage, 
   AreaTaskPage,
-  CreateArea,} from './pages';
-import  Area  from './components';
+  CreateArea, PrivacyPage } from './pages';
+
+import Navbar from './components/Navbar';
+
 
 
 
@@ -41,9 +43,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
+        <Navbar />
         <Routes >
           <Route path="/" element={<LoginPage client={client} />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/createarea" element={<CreateArea />} />
           <Route path="/areaselect" element={<AreaSelectPage client={client} />} />
           <Route path="/areatasks/:name" element={<AreaTaskPage />} />

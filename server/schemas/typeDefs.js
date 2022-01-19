@@ -62,6 +62,7 @@ type Mutation {
     removeArea(
         _id: ID
         areaOwner: String
+        areaName: String
     ): Area
 
     login(email: String!, password: String!): Auth

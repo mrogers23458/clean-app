@@ -1,0 +1,30 @@
+.position-margin {
+    position: relative;
+    background: #c091d3;
+}
+
+.nav-container {
+    background: #c091d3;
+    text-align: right;
+    border-bottom: 1px solid black;
+    padding: 3vw;
+}
+
+.fa {
+    font-size: 3vh;
+}
+
+.links-container {
+    background: #8bc2eb;
+    display: none;
+    padding-bottom: 1vh;
+}
+
+li {
+    text-decoration: underline;
+    color: white;
+    list-style: none;
+    font-size: 5vw;
+    text-align: center;
+    margin-bottom: 1vh;
+}

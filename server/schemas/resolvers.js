@@ -9,12 +9,7 @@ const resolvers = {
         },
 
         user: async (parent, { email }) => {
-            
-            console.log('anything new')
-            console.log(email)
-            console.log({ email })
             const user = User.findOne({email}).populate('areas')
-            console.log(user)
             
           return User.findOne({ email }).populate('areas')
     
@@ -22,10 +17,7 @@ const resolvers = {
 
         // By adding context to our query, we can retrieve the logged in user without specifically searching for them
         me: async (parent, args, context) => {
-            console.log('context below')
-            console.log(context)
             if (context.user) {
-                console.log(context)
             return User.findOne({ _id: context.user._id }).populate('areas');
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -39,6 +31,7 @@ const resolvers = {
         area: async (parent, { areaName }) => {
             return Area.findOne( { areaName } )
         },
+
       },
     
 
@@ -52,7 +45,6 @@ const resolvers = {
         },
 
         addArea: async (parent, { areaName, areaDescription, areaOwner}) => {
-            console.log(areaName, areaDescription, areaOwner)
             const area = await Area.create({areaName, areaDescription, areaOwner})
 
             console.log(area)
@@ -64,12 +56,12 @@ const resolvers = {
             return ( area )
         },
 
-        addTask: async (parent, {taskTitle, taskDescription, taskComplete, taskOwner}) => {
+        addTask: async (parent, {id, taskTitle, taskDescription, taskComplete}) => {
             return Area.findOneAndUpdate(
-                {_id: areaId},
+                {_id: id}, 
                 {
                     $addToSet: {
-                        tasks: { taskTitle, taskDescription, taskComplete, taskOwner }
+                        tasks: { taskTitle, taskDescription, taskComplete }
                     }
                 },
                 {
@@ -96,18 +88,24 @@ const resolvers = {
             return { token, loggedIn}
         },
 
-        removeArea: async (parent, {id, areaName, areaDescription, areaOwner}) => {
-            console.log(id, areaOwner)
-            const area = await Area.findOneAndDelete({ id })
-
+        removeArea: async (parent, {id, areaName, areaOwner}) => {
+            console.log(areaName, areaOwner, id)
+            const area = await Area.findOneAndDelete({areaName: areaName})
+            console.log('area is below')
             console.log(area)
-            await User.findOneAndUpdate(
-                { email: areaOwner },
+            
+            console.log(area._id)
+            const user = await User.findOneAndUpdate(
+                { email: areaOwner},
                 { $pull: {areas: area._id}}
-            )
-
+                )
+                
+                
+                console.log('user is here ', user)
+                
             return ( area )
         },
+
     } 
 }
 

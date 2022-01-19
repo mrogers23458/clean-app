@@ -39,10 +39,10 @@ export const LOGIN = gql `
 `
 
 export const REMOVEAREA = gql `
-    mutation removeArea ($id: ID, $areaOwner: String) {
-      removeArea(_id: $id, areaOwner: $areaOwner) {
-        _id
-        areaOwner
-      }
+  mutation removeArea ($id: ID, $areaOwner: String, $areaName: String) {
+    removeArea(_id: $id, areaOwner: $areaOwner, areaName: $areaName) {
+      areaName
+      areaOwner
     }
+}
 `

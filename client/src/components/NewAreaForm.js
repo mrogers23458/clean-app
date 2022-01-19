@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ADDAREA } from '../utils/mutation';
 import Auth from '../utils/auth'
 import { useNavigate } from 'react-router-dom';
-import { GET_USER } from '../utils/query';
+import '../css/createAreaStyle.css';
 
 export default function NewAreaForm(){
     
@@ -68,14 +68,14 @@ export default function NewAreaForm(){
     }
 
     return (
-        <div>
-            <h2>Add a new area</h2>
+        <div className='create-form-container'>
+            <h1>Add a new area</h1>
             <div className="areaCard">
-                <form>
-                    <label htmlFor='areaName'>Area Name</label>
-                    <input type='text' name="areaName" onChange={handleAreaUpdate} placeholder="Area Name"></input>
-                    <label htmlFor='areaDescription'>Description</label>
-                    <input type='text' name="areaDescription" onChange={handleAreaUpdate} placeholder="Description of area"></input>
+                <form className='add-form'>
+                    <label className='form-label' htmlFor='areaName'>Area Name</label>
+                    <input className='entry-box' type='text' name="areaName" onChange={handleAreaUpdate} placeholder="Area Name"></input>
+                    <label className='form-label' htmlFor='areaDescription'>Description</label>
+                    <input className='description entry-box' type='text' name="areaDescription" onChange={handleAreaUpdate} placeholder="Description of area"></input>
                     <button type='submit' onClick={handleFormSubmit} >Add Area</button>
                 </form>
             </div>

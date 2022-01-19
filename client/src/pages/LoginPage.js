@@ -6,7 +6,6 @@ import { LOGIN } from '../utils/mutation'
 import Auth from '../utils/auth'
 
 export default function LoginPage(){
-    console.log(Auth.getUser())
     let navigate = useNavigate();
 
     //set sate for login credentials
@@ -72,8 +71,10 @@ export default function LoginPage(){
             </div>
             <div className="extraLinks">
                 <p>Dont have an account? <a href="/register">Register</a> for one now!</p>
+                <div className='footer-links'>
                 <a href="/forgotpassword">Forgot Password?</a>
                 <a href="/privacy">Privacy</a>
+                </div>
             </div>
         </div>
     )

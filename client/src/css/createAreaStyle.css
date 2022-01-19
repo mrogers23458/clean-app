@@ -1,0 +1,46 @@
+.create-form-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #4183d7;
+}
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-label {
+    padding: 5px;
+    text-align: left;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.entry-box {
+    margin: 5px;
+    padding: 10px;
+    width: 70vw;
+    border-radius: 5px;
+}
+
+
+/* create task form goes here */
+
+textarea {
+    min-width: 70vw;
+    max-width: 70vw;
+    min-height: 10vh;
+    max-height: 10vh;
+}
+
+h1 {
+    font-size: 7vw;
+    margin: 10vw;
+    padding: 5vw;
+}
+
+.addTaskButton {
+    margin-top: 3vh;
+}

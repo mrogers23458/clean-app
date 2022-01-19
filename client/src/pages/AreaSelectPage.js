@@ -12,7 +12,6 @@ import { GET_USER } from "../utils/query";
 
 export default function AreaSelectPage(props) {
     
-    
     const userInfo = auth.getUser().data;
     const userEmail = userInfo.email
     let navigate = useNavigate();
@@ -46,7 +45,6 @@ export default function AreaSelectPage(props) {
         return (
             <div>
                 <Area data={user} client={client}/>
-                <button onClick={handleNav}> Add New  <span className="addSymbol"> + </span> </button>
             </div>
         )
     }

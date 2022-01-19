@@ -10,17 +10,12 @@
     flex-direction: column;
 }
 
-header {
-    margin-top: 20vh;
-}
-
 .loginContainer {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: green;
+    background: #4183d7;
 }
 
 h1 {
@@ -42,6 +37,8 @@ h1 {
 }
 
 .logButton {
+    background: #8ec7da;
+    color: #ffffff;
     width: 50%;
     height: 5vh;
     margin: 5px;
@@ -51,9 +48,20 @@ h1 {
 /* link related CSS*/
 
 .extraLinks {
-    margin-top: 10vh;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+a {
+    font-size: 5vw;
+    color: #8ec7da;
+}
+
+a:visited {
+    color: #c091d3
 }
 
 .entry {
@@ -69,3 +77,9 @@ h1 {
     font-weight: bold;
     color: white;
 }
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+}
+
