@@ -19,7 +19,7 @@
   "name": "Clean App React App Development",
   "short_name": "Clean App",
   "orientation": "portrait",
-  "start_url": "/",
+  "start_url": "/client/public/index.html",
   "description": "a basic cleaning app",
   "display": "standalone",
   "theme_color": "#000000",
