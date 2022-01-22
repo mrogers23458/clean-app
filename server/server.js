@@ -4,6 +4,8 @@ const path = require('path')
 
 const { typeDefs, resolvers } = require('./schemas')
 
+const { authMiddleware } = require('./utils/auth')
+
 const db = require('./config/connection')
 
 //function to drop the DB for testing - remove prior to deployment
@@ -19,6 +21,8 @@ const app = express()
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+
+    context: authMiddleware,
 })
 
 server.applyMiddleware({ app })

@@ -28,8 +28,8 @@ const resolvers = {
             return Area.find(params).sort({createdAt: -1})
         },
 
-        area: async (parent, { areaName }) => {
-            return Area.findOne( { areaName } )
+        area: async (parent, { areaId }) => {
+            return Area.findOne( { _id: areaId} )
         },
 
       },
@@ -56,19 +56,41 @@ const resolvers = {
             return ( area )
         },
 
-        addTask: async (parent, {id, taskTitle, taskDescription, taskComplete}) => {
+        addTask: async (parent, {areaId, taskTitle, taskDescription, taskComplete} ) => {
+            console.log(areaId)
+            console.log(areaId, taskTitle, taskDescription, taskComplete)
+
             return Area.findOneAndUpdate(
-                {_id: id}, 
+                {_id: areaId}, 
                 {
                     $addToSet: {
                         tasks: { taskTitle, taskDescription, taskComplete }
                     }
-                },
-                {
-                    new: true,
-                    runValidators: true,
                 }
             );
+        },
+
+        updateTask: async (parent, {areaId, taskId, updatedTaskTitle, updatedTaskDescription, updatedTaskComplete} ) => {
+
+           return Area.findOneAndUpdate(
+               {"tasks.id": taskId },
+               {
+                   '$set': {
+                       "tasks.$.taskTitle": updatedTaskTitle,
+                       "tasks.$.taskDescription": updatedTaskDescription,
+                       "tasks.$.taskComplete": updatedTaskComplete
+                   }
+               }
+           )
+        },
+
+        removeTask: async (parent, { areaId, taskId }) => {
+            return Area.findOneAndUpdate(
+                {_id: areaId},
+                {
+                    $pull: {tasks: {_id: taskId}}
+                }
+            )
         },
 
         login: async (parent, {email, password}) => {

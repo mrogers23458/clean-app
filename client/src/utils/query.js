@@ -43,11 +43,12 @@ query getAreas {
 `
 
 export const GET_ONE_AREA = gql `
-query getSingleArea($areaName: String) {
-    area(areaName: $areaName) {
+query getSingleArea($areaId: ID) {
+    area(areaId: $areaId) {
         _id
         areaName
         areaOwner
+        areaDescription
         tasks {
             _id
             taskTitle

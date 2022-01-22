@@ -16,6 +16,7 @@ import {
   CreateArea, PrivacyPage } from './pages';
 
 import Navbar from './components/Navbar';
+import NewTaskForm from './components/NewTaskForm';
 
 
 
@@ -44,13 +45,14 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <Navbar />
-        <Routes >
+        <Routes client={client} >
           <Route path="/" element={<LoginPage client={client} />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/createarea" element={<CreateArea />} />
+          <Route path="/createtask/:id" element={<NewTaskForm client={client} />} />
           <Route path="/areaselect" element={<AreaSelectPage client={client} />} />
-          <Route path="/areatasks/:name" element={<AreaTaskPage />} />
+          <Route path="/areatasks/:id" element={<AreaTaskPage client={client} />} />
         </Routes>
     </div>
     </ApolloProvider>

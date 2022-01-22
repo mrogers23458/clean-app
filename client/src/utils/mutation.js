@@ -44,5 +44,30 @@ export const REMOVEAREA = gql `
       areaName
       areaOwner
     }
-}
+  }
 `
+
+export const ADDTASK = gql `
+  mutation addTask ($areaId: ID, $taskTitle: String, $taskDescription: String, $taskComplete:Boolean) {
+    addTask (taskTitle: $taskTitle, taskDescription: $taskDescription, taskComplete: $taskComplete, areaId: $areaId) {
+      tasks {
+        taskTitle
+        taskDescription
+        taskComplete
+      }
+    }
+  }`
+  
+  export const UPDATETASK = gql `
+  mutation updateTasksMutation ($areaId: ID, $taskId: ID, $updatedTaskTitle: String, $updatedTaskDescription: String, $updatedTaskComplete: Boolean) {
+    updateTask (areaId: $areaId, taskId: $taskId, updatedTaskTitle: $updatedTaskTitle, updatedTaskDescription: $updatedTaskDescription, updatedTaskComplete: $updatedTaskComplete) {
+      areaName
+      _id
+      tasks {
+        _id
+        taskTitle
+        taskDescription
+        taskComplete
+      }
+    }
+  }`

@@ -7,24 +7,26 @@ import Navbar from "../components/Navbar";
 import '../css/navBarStyle.css'
 
 
-export default function AreaTaskPage () {
-
-    let area  = useParams();
-    console.log(area)
-    const trimAreaName = area.name
-    console.log(trimAreaName)
+export default function AreaTaskPage (props) {
+    const client = props.client
+    const params = useParams()
+    console.log(params)
+    const someId = params.id
+    console.log(params.id)
     //query with params for tasks
     //i still need to write query on front and back end to get all tasks associated with an area by name
     //then pass that data into task component as props, render tasks in task component with props.map
 
-    const areaObj = {
-        areaName: trimAreaName
+    const queryObj = {
+        areaId: someId
     }
 
-    const { areaName } = areaObj
+    const { areaId } = queryObj
+    console.log(areaId)
+
     const { loading, data} = useQuery(GET_ONE_AREA, {
         variables: {
-            areaName
+            areaId
         }
     })
 
@@ -41,7 +43,7 @@ export default function AreaTaskPage () {
 
     return (
         <div>
-            <Task areaData={data} />
+            <Task areaData={data} client={client} />
         </div>
     )
 }

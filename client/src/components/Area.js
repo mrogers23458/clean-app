@@ -16,7 +16,7 @@ export default function Area(props){
     const modalText = document.querySelector('.modal-text')
     const user = props.data
     const userEmail = props.data.email
-    console.log(userEmail)
+    console.log(user)
     const navigate = useNavigate()
 
     //hooks and states
@@ -31,12 +31,14 @@ export default function Area(props){
     const handleNav = function(e) {
 
         const string = e.target.innerText
+        const id = e.target.id
+        console.log(id)
         const name = string
         if (e.target.innerText === 'Add New +') {
             return navigate('/createarea')
         }
 
-        return navigate(`/areatasks/${name}`)
+        return navigate(`/areatasks/${id}`)
     }
 
     const deleteArea = async (args) => {
@@ -67,7 +69,7 @@ export default function Area(props){
         //new button class name to display area name
         const newName = btnClassName.replace('btn', '')
         //id associated with mapped area
-        const newId = (e.target.id)
+        const newId = (e.target.parentNode)
         console.log(newName)
 
         //set state to be id of mapped area
@@ -110,8 +112,8 @@ export default function Area(props){
                 {user.areas.map((area) => {
                     return (
                         <div key={area._id} className="tile-container">
-                            <div className="area-tile">
-                                <h2 className='title' onClick={handleNav}>{area.areaName}</h2>
+                            <div className="area-tile" id={area._id} >
+                                <h2 className='title' id={area._id} onClick={handleNav}> {area.areaName}</h2>
                                 <button className={area.areaName + ' ' + 'btn'} id={area._id} type='submit' onClick={displayModal}>&times;</button>
                             </div>
                         </div>

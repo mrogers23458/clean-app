@@ -36,7 +36,7 @@ type Query {
     user(email: String): User
     me: User
     areas(email: String): [Area]
-    area(areaName: String): Area
+    area(areaId: ID): Area
 }
 
 
@@ -47,16 +47,28 @@ type Mutation {
         email: String
         password: String
     ): Auth
+
     addArea(
         areaName: String
         areaDescription: String,
         areaOwner: String
     ) : Area
+
     addTask(
-        areaName: String
+        areaId: ID
         taskTitle: String
         taskDescription: String
         taskOwner: String
+        taskComplete: Boolean
+    ): Area
+
+    updateTask(
+        areaId: ID
+        taskId: ID
+        updatedTaskTitle: String
+        updatedTaskDescription: String
+        updatedTaskOwner: String
+        updatedTaskComplete: Boolean
     ): Area
 
     removeArea(
@@ -64,6 +76,13 @@ type Mutation {
         areaOwner: String
         areaName: String
     ): Area
+
+    removeTask(
+        taskId: ID,
+        taskTitle: String
+        taskDescription: String
+        taskComplete: Boolean
+    ) : Area
 
     login(email: String!, password: String!): Auth
 }

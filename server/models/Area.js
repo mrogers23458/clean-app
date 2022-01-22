@@ -22,7 +22,8 @@ const areaSchema = new Schema (
             },
 
             taskComplete: {
-                type: Boolean
+                type: Boolean,
+                default: false
             },
             
             taskOwner: {
